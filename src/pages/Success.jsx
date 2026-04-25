@@ -26,7 +26,7 @@ export default function Success() {
       <h1 className="text-2xl font-bold text-green-600">
         Subscription Activated 🎉
       </h1>
-      <p className="mt-4">You can now use premium features.</p>
+      <p className="mt-4">You can now create projects.</p>
     </div>
   );
 }

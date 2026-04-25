@@ -7,7 +7,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchWorkspaces();
-  }, []);
+  }, [workspaces]);
 
   const fetchWorkspaces = async () => {
     try {

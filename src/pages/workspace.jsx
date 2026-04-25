@@ -7,6 +7,8 @@ export default function Workspace() {
   const { id } = useParams(); // workspaceId
 
   const [projects, setProjects] = useState([]);
+  const [inviteEmail, setInviteEmail] = useState("");
+  const [inviteMessage, setInviteMessage] = useState("");
 
   useEffect(() => {
     fetchProjects();
@@ -95,9 +97,61 @@ export default function Workspace() {
     }
   };
 
+   /* =========================
+     INVITE MEMBER
+  ========================= */
+   const handleInvite = async () => {
+    if (!inviteEmail) {
+      setInviteMessage("Please enter an email");
+      return;
+    }
+
+    try {
+      const res = await API.post(`/workspaces/${id}/invite`, {
+        email: inviteEmail,
+      });
+
+      setInviteMessage(res.data.message);
+      setInviteEmail(""); // clear input
+    } catch (err) {
+      console.error(err);
+      setInviteMessage(
+        err.response?.data?.error || "Failed to invite user"
+      );
+    }
+  };
+
+
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold mb-4">Workspace Projects</h1>
+      {/* =========================
+          INVITE MEMBER SECTION
+      ========================= */}
+      <div className="mb-6 p-4 border rounded bg-gray-50">
+        <h2 className="text-lg font-semibold mb-2">Invite Member</h2>
+
+        <div className="flex gap-2">
+          <input
+            type="email"
+            placeholder="Enter user email"
+            value={inviteEmail}
+            onChange={(e) => setInviteEmail(e.target.value)}
+            className="border px-3 py-2 rounded w-full"
+          />
+
+          <button
+            onClick={handleInvite}
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+          >
+            Invite
+          </button>
+        </div>
+
+        {inviteMessage && (
+          <p className="mt-2 text-sm text-gray-700">{inviteMessage}</p>
+        )}
+      </div>
 
       <button
         onClick={createProject}

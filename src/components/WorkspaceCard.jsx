@@ -27,7 +27,10 @@ console.log(
   return (
     <div
       className="bg-white p-4 rounded shadow cursor-pointer hover:shadow-lg relative"
-      onClick={() => navigate(`/workspace/${workspace.id}`)}
+      onClick={() =>
+         {if(workspace.subscription_status==='active')
+        navigate(`/workspace/${workspace.id}`);
+      else alert("Workspace needs to be activated first");}}
     >
       <h2 className="text-xl font-bold">{workspace.name}</h2>
       <p className="text-gray-500">Role: {workspace.role}</p>
