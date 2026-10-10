@@ -16,6 +16,7 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Navbar />
+        <main className="app-shell">
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -32,6 +33,7 @@ function App() {
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<Cancel />} />
         </Routes>
+        </main>
       </BrowserRouter>
     </AuthProvider>
   );

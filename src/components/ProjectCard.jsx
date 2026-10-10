@@ -5,17 +5,17 @@ export default function ProjectCard({ project, onEdit, onDelete }) {
 
   return (
     <div
-      className="bg-white p-4 rounded shadow hover:shadow-lg relative"
+      className="card-surface group relative cursor-pointer rounded-2xl border border-slate-200 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-indigo-200 hover:shadow-xl"
       onClick={() => navigate(`/project/${project.id}`)}
     >
       {/* ACTION BUTTONS */}
       <div
-        className="absolute top-2 right-2 flex gap-2"
+        className="absolute right-5 top-5 flex gap-1 rounded-lg border border-slate-100 bg-white p-1 opacity-100 shadow-sm transition sm:opacity-0 sm:group-hover:opacity-100"
         onClick={(e) => e.stopPropagation()} // prevent navigation
       >
         <button
           onClick={onEdit}
-          className="text-blue-500 hover:text-blue-700"
+          className="rounded-md px-2 py-1 text-sm text-indigo-500 transition hover:bg-indigo-50 hover:text-indigo-700"
           title="Edit"
         >
           ✏️
@@ -23,7 +23,7 @@ export default function ProjectCard({ project, onEdit, onDelete }) {
 
         <button
           onClick={onDelete}
-          className="text-red-500 hover:text-red-700"
+          className="rounded-md px-2 py-1 text-sm text-rose-500 transition hover:bg-rose-50 hover:text-rose-700"
           title="Delete"
         >
           🗑️
@@ -31,9 +31,13 @@ export default function ProjectCard({ project, onEdit, onDelete }) {
       </div>
 
       {/* CONTENT */}
-      <h2 className="text-xl font-bold">{project.name}</h2>
-      <p className="text-gray-500">{project.description}</p>
-      <p className="text-sm text-blue-500">{project.status}</p>
+      <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 text-violet-600">◈</div>
+      <h2 className="display-font pr-16 text-xl font-bold text-slate-900">{project.name}</h2>
+      <p className="mt-2 line-clamp-2 min-h-10 text-sm leading-5 text-slate-500">{project.description || "No description added yet."}</p>
+      <div className="mt-5 flex items-center justify-between">
+        <span className="rounded-full bg-indigo-50 px-2.5 py-1 text-xs font-bold capitalize text-indigo-700">{project.status || "Planning"}</span>
+        <span className="text-sm font-semibold text-slate-400 transition group-hover:text-indigo-600">Open chat →</span>
+      </div>
     </div>
   );
 }

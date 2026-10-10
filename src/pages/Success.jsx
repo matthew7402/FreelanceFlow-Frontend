@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import API from "../api/api";
 
 export default function Success() {
@@ -22,11 +23,8 @@ export default function Success() {
   };
 
   return (
-    <div className="p-8 text-center">
-      <h1 className="text-2xl font-bold text-green-600">
-        Subscription Activated 🎉
-      </h1>
-      <p className="mt-4">You can now create projects.</p>
+    <div className="page-glow grid min-h-full place-items-center px-5 py-12 text-center">
+      <div className="card-surface max-w-md rounded-3xl border border-white bg-white p-10"><div className="mx-auto mb-5 grid h-16 w-16 place-items-center rounded-full bg-emerald-100 text-3xl text-emerald-600">✓</div><h1 className="display-font text-2xl font-extrabold text-slate-900">Subscription activated!</h1><p className="mt-3 text-slate-500">Your workspace is ready for projects and collaboration.</p><Link to="/dashboard" className="mt-7 inline-block rounded-xl bg-indigo-600 px-5 py-3 font-bold text-white transition hover:bg-indigo-700">Go to dashboard →</Link></div>
     </div>
   );
 }

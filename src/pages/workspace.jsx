@@ -123,13 +123,21 @@ export default function Workspace() {
 
 
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold mb-4">Workspace Projects</h1>
+    <div className="page-glow min-h-full px-5 py-10 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-7xl">
+      <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="mb-2 text-sm font-bold uppercase tracking-[.18em] text-indigo-600">Workspace</p>
+          <h1 className="display-font text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Projects in motion.</h1>
+          <p className="mt-2 text-slate-500">Keep client work moving with clear conversations and simple collaboration.</p>
+        </div>
+        <button onClick={createProject} className="rounded-xl bg-indigo-600 px-5 py-3 font-bold text-white shadow-lg shadow-indigo-200 transition hover:-translate-y-0.5 hover:bg-indigo-700">+ New project</button>
+      </div>
       {/* =========================
           INVITE MEMBER SECTION
       ========================= */}
-      <div className="mb-6 p-4 border rounded bg-gray-50">
-        <h2 className="text-lg font-semibold mb-2">Invite Member</h2>
+      <div className="card-surface mb-8 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
+        <div className="mb-4 flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-xl bg-teal-50 text-teal-600">+</span><div><h2 className="display-font text-lg font-bold text-slate-900">Invite a collaborator</h2><p className="text-sm text-slate-500">Add a teammate to this workspace.</p></div></div>
 
         <div className="flex gap-2">
           <input
@@ -137,32 +145,26 @@ export default function Workspace() {
             placeholder="Enter user email"
             value={inviteEmail}
             onChange={(e) => setInviteEmail(e.target.value)}
-            className="border px-3 py-2 rounded w-full"
+            className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-100"
           />
 
           <button
             onClick={handleInvite}
-            className="bg-blue-500 text-white px-4 py-2 rounded"
+            className="rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-indigo-600"
           >
             Invite
           </button>
         </div>
 
         {inviteMessage && (
-          <p className="mt-2 text-sm text-gray-700">{inviteMessage}</p>
+          <p className="mt-3 text-sm font-medium text-slate-600">{inviteMessage}</p>
         )}
       </div>
 
-      <button
-        onClick={createProject}
-        className="mb-6 bg-green-500 text-white px-4 py-2 rounded"
-      >
-        + Create Project
-      </button>
-
-      <div className="grid gap-4">
+      <div className="mb-5 flex items-center gap-3"><span className="rounded-lg bg-white px-3 py-1.5 text-sm font-bold text-slate-700 shadow-sm ring-1 ring-slate-200">{projects.length} project{projects.length === 1 ? "" : "s"}</span><span className="text-sm text-slate-500">Click a project to open its chat.</span></div>
+      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {projects.length === 0 ? (
-          <p>No projects yet</p>
+          <div className="card-surface col-span-full rounded-2xl border border-dashed border-slate-300 bg-white/70 px-6 py-16 text-center"><div className="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-2xl bg-violet-50 text-2xl">◈</div><h2 className="display-font text-xl font-bold text-slate-800">Your project board is clear</h2><p className="mt-2 text-slate-500">Create a project to start collaborating.</p></div>
         ) : (
           projects.map((project) => (
             <ProjectCard
@@ -173,6 +175,7 @@ export default function Workspace() {
             />
           ))
         )}
+      </div>
       </div>
     </div>
   );
