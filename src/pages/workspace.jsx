@@ -55,7 +55,6 @@ export default function Workspace() {
   const updateProject = async (project) => {
     const name = prompt("New name", project.name);
     const description = prompt("New description", project.description);
-    const status = prompt("New status", project.status);
 
     try {
       const res = await API.put(
@@ -63,7 +62,6 @@ export default function Workspace() {
         {
           name,
           description,
-          status,
         }
       );
 
