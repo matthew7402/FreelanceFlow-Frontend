@@ -23,8 +23,10 @@ export default function Dashboard() {
     if (!name) return;
 
     try {
-      const res = await API.post("/workspaces", { name });
-      setWorkspaces((prev) => [res.data, ...prev]);
+      await API.post("/workspaces", { name });
+      // The creation response does not include membership role details.
+      // Reloading provides the complete workspace shape used by the card.
+      await fetchWorkspaces();
     } catch (err) {
       alert("Failed to create workspace");
     }
